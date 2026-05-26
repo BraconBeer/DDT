@@ -54,8 +54,8 @@ function loadComponents() {
     // ========== 3. Логотип ==========
     const logo = document.querySelector('.logo-flag');
     if (logo) {
-        logo.innerHTML = `<img src="Logo2.png" alt="DnD Logo">`;
-        logo.href = "../index.html";
+        logo.innerHTML = `<img src="Logo.png" alt="DnD Logo">`;
+        logo.href = "index.html";
     }
 
     // ========== 4. Создание структуры с боковыми панелями ==========
