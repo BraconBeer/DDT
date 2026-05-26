@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Таверна "Веселый Дракон" - DDT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css"> 
+    <link rel="stylesheet" href="tavern.css">
+</head>
+<body>
+    <div class="navbar-strip"></div>
+    
+    <div class="page-wrapper">
+        <div class="top-bar"></div>
+        <a href="index.html" class="logo-flag"></a>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="tavern-container">
+                    <!-- Шапка таверны -->
+                    <div class="tavern-header">
+                        <h1>Таверна "Веселый Дракон"</h1>
+                    </div>
+                    
+                    <div class="two-columns">
+                        <!-- Основной список -->
+                        <div>
+                            <div class="forum-header">
+                                <div class="title-block" style="margin:0; padding:8px 20px;">
+                                    <h2 style="font-size:1.3rem; margin:0;">Истории и обсуждения</h2>
+                                </div>
+                                <button class="new-topic-btn" id="newTopicBtn">Рассказать историю</button>
+                            </div>
+                            <div id="topicsList"></div>
+                            <div id="emptyMessage" class="empty-message" style="display: none;">
+                                <div class="big-icon"></div>
+                                <p>В таверне пока тихо... Будь первым, кто расскажет историю!</p>
+                                <button class="new-topic-btn" style="margin-top: 20px;" onclick="document.getElementById('newTopicBtn').click()">Рассказать первую историю →</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Боковая панель -->
+                        <div>
+                            <div class="hot-topics-sidebar">
+                                <h3>Популярное</h3>
+                                <div id="hotTopicsList"></div>
+                            </div>
+                            <div class="hot-topics-sidebar">
+                                <h3>Важная информация</h3>
+                                <p style="color:#82915c; font-size:0.8rem;">1. Уважай других путников<br>2. Мат запрещён<br>3. Истории должны быть про D&D<br>4. Пили грибной чай 🍄</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="topicModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-inner">
+                <div class="modal-header">
+                    <h2>📝 Рассказать историю</h2>
+                    <button id="closeModalBtn" class="modal-close">✕</button>
+                </div>
+                <input type="text" id="topicTitle" class="modal-input" placeholder="Заголовок истории">
+                <textarea id="topicContent" rows="8" class="modal-textarea" placeholder="Поделитесь своей историей..."></textarea>
+                <div class="modal-buttons">
+                    <button id="cancelModalBtn" class="modal-cancel">Отмена</button>
+                    <button id="submitTopicBtn" class="modal-submit">Опубликовать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="components.js"></script>
+    <script src="tavern.js"></script>
+</body>
+</html>

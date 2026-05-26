@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css"> 
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+        }
+    }
+</script>
+<script type="module" src="dice3d.js"></script>
+</head>
+<body>
+ <div class="navbar-strip"></div>
+    
+    <div class="page-wrapper">
+        <div class="top-bar"></div>
+        <a href="../index.html" class="logo-flag"></a>
+        <!-- Контейнер - внутри всё, что должно быть по центру -->
+        <main class="main-content">
+            <div class="container">
+            <div class="search-bar">
+    <input type="text" class="search-input" placeholder="Поиск историй, монстров, правил...">
+</div>
+
+            <div class="title-block">
+                <h1>Danger Dungeon Together</h1>
+            </div>
+
+            <!-- Три плашки-кнопки -->
+            <div class="cards-grid">
+                <a href="guide.html" class="card">
+                    <h2>Справочник</h2>
+                    <p>Правила и механики</p>
+                </a>
+
+                <a href="bestiary.html" class="card">
+                    <h2>Бестиарий</h2>
+                    <p>Монстры и существа</p>
+                </a>
+
+            </div>
+<!-- Секция с историями (теперь живые данные из таверны) -->
+<div class="stories-section" id="storiesSection">
+    <div class="stories-header">
+        <h2>Истории из таверны</h2>
+        <a href="tavern.html" class="more-link">Все истории →</a>
+    </div>
+    <div class="stories-list" id="storiesList">
+        <div style="text-align:center; padding:20px;">Загрузка историй...</div>
+    </div>
+</div>
+        </div>  <!-- Закрыли container -->
+        <!-- Новая секция для скролла -->
+<section class="articles-section">
+    <div class="container">
+        <div class="wisdom-card">  <!-- ОБЩИЙ ФОН-КОНТЕЙНЕР -->
+            <div class="section-header">
+                <h2>Свитки мудрости</h2>
+                <a href="#" class="more-link">Все статьи →</a>
+            </div>
+
+            <div class="articles-vertical-grid">
+                <!-- Статья 1 -->
+                <div class="article-vertical">
+                    <div class="article-vertical-image"></div>
+                    <div class="article-vertical-content">
+                        <h3>Как создать незабываемого NPC</h3>
+                        <p>Секреты от опытных мастеров: персонажи, которых игроки запомнят навсегда...</p>
+                        <div class="article-meta">15 мин чтения</div>
+                    </div>
+                </div>
+                
+                <!-- Статья 2 -->
+                <div class="article-vertical">
+                    <div class="article-vertical-image"></div>
+                    <div class="article-vertical-content">
+                        <h3>Баланс боя: как не убить партию</h3>
+                        <p>Расчет сложности, CR монстров и ловушки, которые добавят драмы без TPK...</p>
+                        <div class="article-meta">20 мин чтения</div>
+                    </div>
+                </div>
+                
+                <!-- Статья 3 -->
+                <div class="article-vertical">
+                    <div class="article-vertical-image"></div>
+                    <div class="article-vertical-content">
+                        <h3>Лор драконов: от древних до теневых</h3>
+                        <p>Полное руководство по драконьему пантеону, цветам и характерам...</p>
+                        <div class="article-meta">25 мин чтения</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        </main>
+    </div>  <!-- Закрыли page-wrapper -->
+    <script src="../components.js"></script>
+    <script>
+// Загрузка свежих историй из таверны для главной страницы
+function loadStoriesToMainPage() {
+    const storiesList = document.getElementById('storiesList');
+    if (!storiesList) return;
+    
+    const stored = localStorage.getItem('ddt_tavern_data');
+    if (!stored) {
+        // Данные по умолчанию, если таверна ещё не создавала записи
+        storiesList.innerHTML = `
+            <div class="story-item" onclick="location.href='tavern.html'" style="cursor:pointer;">
+                <span class="story-title">Как я чуть не сжёг таверну</span>
+                <span class="story-meta">Паладин · 2 часа назад</span>
+            </div>
+            <div class="story-item" onclick="location.href='tavern.html'" style="cursor:pointer;">
+                <span class="story-title">Некромант и пропавший ужин</span>
+                <span class="story-meta">Варвар · 5 часов назад</span>
+            </div>
+            <div class="story-item" onclick="location.href='tavern.html'" style="cursor:pointer;">
+                <span class="story-title">Дракон, который не хотел драться</span>
+                <span class="story-meta">Бард · вчера</span>
+            </div>
+        `;
+        return;
+    }
+    
+    try {
+        const data = JSON.parse(stored);
+        const topics = data.topics || [];
+        
+        // Берём 3 самые новые истории
+        const latest = [...topics]
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .slice(0, 3);
+        
+        if (latest.length === 0) {
+            storiesList.innerHTML = `<div style="text-align:center; padding:20px; color:#82915c;">Пока нет историй. Будь первым!</div>`;
+            return;
+        }
+        
+        function timeAgo(date) {
+            const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+            if (seconds < 60) return 'только что';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `${minutes} мин назад`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `${hours} ч назад`;
+            const days = Math.floor(hours / 24);
+            if (days < 7) return `${days} дн назад`;
+            return new Date(date).toLocaleDateString();
+        }
+        
+        storiesList.innerHTML = latest.map(topic => `
+            <div class="story-item" onclick="location.href='topic.html?id=${topic.id}'" style="cursor:pointer;">
+                <span class="story-title">${escapeHtmlSimple(topic.title)}</span>
+                <span class="story-meta">${escapeHtmlSimple(topic.author)} · ${timeAgo(topic.createdAt)}</span>
+            </div>
+        `).join('');
+        
+    } catch(e) {
+        console.error('Ошибка загрузки историй:', e);
+    }
+}
+
+function escapeHtmlSimple(text) {
+    if (!text) return '';
+    return text.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// Загружаем истории при загрузке страницы
+document.addEventListener('DOMContentLoaded', loadStoriesToMainPage);
+
+// Также обновляем при изменении данных в localStorage (если пользователь открыл таверну в другой вкладке)
+window.addEventListener('storage', (e) => {
+    if (e.key === 'ddt_tavern_data') {
+        loadStoriesToMainPage();
+    }
+});
+</script>
+    </body>
+</html>

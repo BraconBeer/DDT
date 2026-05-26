@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Красный дракон - Бестиарий DDT</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../sidebar.css"> 
+    <link rel="stylesheet" href="creature-page.css">
+</head>
+<body>
+    <!-- Пустые контейнеры для компонентов, которые заполнит JS -->
+    <div class="navbar-strip"></div>
+    
+    <div class="page-wrapper">
+        <div class="top-bar"></div>
+        <a href="../index.html" class="logo-flag"></a>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="creature-page">
+                    <a href="../bestiary.html" class="back-btn">← Назад к бестиарию</a>
+                    
+                    <!-- Геройский заголовок с фоном -->
+                    <div class="creature-hero">
+                        <div class="hero-background-image"></div>
+                        <div class="hero-content">
+                            <div class="creature-title">
+                                <h1>Красный дракон</h1>
+                                <div class="creature-badges">
+                                    <span class="badge">Дракон</span>
+                                    <span class="badge">Хаотично-злой</span>
+                                    <span class="badge">Ур. 10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Краткая статистика -->
+                    <div class="stats-row">
+                        <div class="stat-pill">Размер: <strong>Большой</strong></div>
+                        <div class="stat-pill">Хиты: <strong>178 (17к10 + 85)</strong></div>
+                        <div class="stat-pill">КД: <strong>18</strong></div>
+                        <div class="stat-pill">Скорость: <strong>40 фт, летает 80 фт</strong></div>
+                    </div>
+
+                    <!-- Характеристики сеткой -->
+                    <div class="attributes-grid">
+                        <div class="attr-card"><span class="attr-name">Сила</span><span class="attr-value">23 (+6)</span></div>
+                        <div class="attr-card"><span class="attr-name">Ловкость</span><span class="attr-value">12 (+1)</span></div>
+                        <div class="attr-card"><span class="attr-name">Телосложение</span><span class="attr-value">21 (+5)</span></div>
+                        <div class="attr-card"><span class="attr-name">Интеллект</span><span class="attr-value">14 (+2)</span></div>
+                        <div class="attr-card"><span class="attr-name">Мудрость</span><span class="attr-value">13 (+1)</span></div>
+                        <div class="attr-card"><span class="attr-name">Харизма</span><span class="attr-value">17 (+3)</span></div>
+                    </div>
+
+                    <!-- Спассброски и навыки -->
+                    <div class="skills-section">
+                        <div class="skills-block">
+                            <h3>Спассброски</h3>
+                            <p>Ловкость +5, Телосложение +9, Мудрость +5, Харизма +7</p>
+                        </div>
+                        <div class="skills-block">
+                            <h3>Навыки</h3>
+                            <p>Восприятие +9, Скрытность +5</p>
+                        </div>
+                        <div class="skills-block">
+                            <h3>Иммунитеты</h3>
+                            <p>Огонь, испуг</p>
+                        </div>
+                        <div class="skills-block">
+                            <h3>Языки</h3>
+                            <p>Драконий, общий</p>
+                        </div>
+                    </div>
+
+                    <!-- Способности -->
+                    <div class="content-block">
+                        <h2>Способности</h2>
+                        <div class="ability-card">
+                            <div class="ability-title">Дыхание огнём (Перезарядка 5-6)</div>
+                            <p>Дракон выдыхает огонь в 30-футовом конусе. Существа должны преуспеть в спасброске Ловкости (Сл 17), иначе получают <strong class="fire">56 (16к6) урона огнём</strong>, или половину при успехе.</p>
+                        </div>
+                        <div class="ability-card">
+                            <div class="ability-title">Ужасающее присутствие</div>
+                            <p>Все существа в 120 футах должны преуспеть в спасброске Мудрости (Сл 16), иначе становятся испуганными на 1 минуту. Испуганное существо может повторять спасбросок в конце каждого своего хода.</p>
+                        </div>
+                        <div class="ability-card">
+                            <div class="ability-title">Полет</div>
+                            <p>Дракон может летать со скоростью 80 футов и зависать в воздухе.</p>
+                        </div>
+                    </div>
+
+                    <!-- Действия -->
+                    <div class="content-block">
+                        <h2>Действия</h2>
+                        <div class="action-list">
+                            <div class="action-item">
+                                <span class="action-name">Мультиатака:</span>
+                                <span>Дракон совершает три атаки: одну укусом и две когтями.</span>
+                            </div>
+                            <div class="action-item">
+                                <span class="action-name">Укус:</span>
+                                <span>+10 к попаданию, досягаемость 10 фт. Цель получает 17 (2к10 + 6) колющего урона плюс 5 (1к10) урона огнём.</span>
+                            </div>
+                            <div class="action-item">
+                                <span class="action-name">Коготь:</span>
+                                <span>+10 к попаданию, досягаемость 5 фт. Цель получает 13 (2к6 + 6) рубящего урона.</span>
+                            </div>
+                            <div class="action-item">
+                                <span class="action-name">Хвост:</span>
+                                <span>+10 к попаданию, досягаемость 15 фт. Цель получает 15 (2к8 + 6) дробящего урона.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Легендарные действия -->
+                    <div class="content-block legendary">
+                        <h2>Легендарные действия (3/раунд)</h2>
+                        <div class="action-list">
+                            <div class="action-item">
+                                <span class="action-name">Обнаружение:</span>
+                                <span>Дракон совершает проверку Восприятия.</span>
+                            </div>
+                            <div class="action-item">
+                                <span class="action-name">Удар хвостом:</span>
+                                <span>Дракон совершает одну атаку хвостом.</span>
+                            </div>
+                            <div class="action-item">
+                                <span class="action-name">Взмах крыльев (2 действия):</span>
+                                <span>Дракон машет крыльями. Все существа в 10 футах должны преуспеть в спасброске Ловкости (Сл 18), иначе получают 13 (2к6 + 6) дробящего урона и сбиваются с ног.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Цитата -->
+                    <div class="quote-block">
+                        "Огонь — это жизнь. Всё остальное просто горит."
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Подключаем JS в самом конце перед закрытием body -->
+    <script src="../components.js"></script>
+</body>
+</html>

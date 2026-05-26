@@ -1,0 +1,212 @@
+/* bestiary.css - обновлённый */
+
+.bestiary-content {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Заголовок и поиск в одной строке */
+.bestiary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.bestiary-header .title-block {
+    margin: 0;
+}
+
+.bestiary-header .title-block h1 {
+    white-space: nowrap;
+}
+
+.bestiary-header .search-bar {
+    max-width: 280px;
+    margin: 0;
+}
+
+/* Фильтры типажей (как на скриншоте) */
+.type-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecd8b2;
+}
+
+.type-btn {
+    background-color: #2c3b23;
+    border: #ecd8b2;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-family: 'Underdog', system-ui, sans-serif;
+    font-size: 0.9rem;
+    color: #ecd8b2;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.type-btn:hover {
+    background-color: #51161a;
+    transform: translateY(-2px);
+}
+
+.type-btn.active {
+    background-color: #ecd8b2;
+    color: #2c3b23;
+}
+
+/* Сетка существ */
+.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+/* Плитка существа */
+.creature-tile {
+    background-color: #2c3b23;
+    border: 1px solid #ecd8b2;
+    border-radius: 20px;
+    padding: 18px 12px 16px 12px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.creature-tile:hover {
+    transform: translateY(-5px);
+    background-color: #3a4d2e;
+    border-color: #faa722;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.tile-icon {
+    font-size: 3rem;
+}
+
+.tile-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ecd8b2;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.tile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    width: 100%;
+}
+
+/* Меняем местами оформление: тип теперь как был размер, а размер как был тип */
+.tile-type {
+    background-color: #51161a;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #ecd8b2;
+    font-size: 0.75rem;
+    width: 100%;
+    max-width: 130px;
+}
+
+.tile-size {
+    color: #82915c;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.tile-cr {
+    background-color: #faa722;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: #2c3b23;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width: 100%;
+    max-width: 80px;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 30px 0 50px;
+}
+
+.page-btn {
+    background-color: #2c3b23;
+    border: 1px solid #ecd8b2;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-family: 'Underdog', system-ui, sans-serif;
+    font-size: 0.9rem;
+    color: #ecd8b2;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.page-btn:hover {
+    background-color: #51161a;
+    transform: translateY(-2px);
+}
+
+.page-btn.active {
+    background-color: #ecd8b2;
+    color: #2c3b23;
+    border-color: #ecd8b2;
+}
+
+/* Адаптив */
+@media (max-width: 650px) {
+    .bestiary-header {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .bestiary-header .search-bar {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .compact-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    
+    .tile-name {
+        font-size: 0.9rem;
+    }
+    
+    .tile-icon {
+        font-size: 2.5rem;
+    }
+    
+    .type-btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .compact-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+}

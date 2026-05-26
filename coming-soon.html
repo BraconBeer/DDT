@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скоро появится - DDT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <style>
+        .soon-container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 50px 30px;
+            background: #2c3b23;
+            border-radius: 50px;
+            border: 2px solid #faa722;
+        }
+        .soon-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+        .soon-container h1 {
+            color: #faa722;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        .soon-container p {
+            color: #ecd8b2;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #faa722;
+            color: #2c3b23;
+            padding: 12px 30px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Underdog', system-ui;
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .back-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Центрируем контейнер относительно родителя */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-strip"></div>
+    <div class="page-wrapper">
+        <div class="top-bar"></div>
+        <a href="index.html" class="logo-flag"></a>
+        <main class="main-content">
+            <div class="container">
+                <div class="soon-container">
+                    <h1>Страница в разработке</h1>
+                    <p>Этот раздел ещё не готов, но мы уже работаем над ним!<br>Загляните позже — здесь появится что-то интересное.</p>
+                    <button onclick="history.back()" class="back-btn">← Вернуться назад</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="components.js"></script>
+</body>
+</html>

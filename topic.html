@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>История - Таверна "Веселый Дракон"</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css"> 
+    <link rel="stylesheet" href="topic.css">
+</head>
+<body>
+    <div class="navbar-strip"></div>
+    
+    <div class="page-wrapper">
+        <div class="top-bar"></div>
+        <a href="index.html" class="logo-flag"></a>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="topic-container">
+                    
+                    <div id="topicContent">
+                        <div class="loading">Загрузка истории...</div>
+                    </div>
+                    
+                    <div id="replySection" style="display: none;">
+                        <div class="reply-form">
+                            <h3>Добавить ответ</h3>
+                            <textarea id="replyText" rows="4" class="reply-textarea" placeholder="Напишите свой ответ..."></textarea>
+                            <button id="submitReply" class="reply-submit">Отправить ответ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="components.js"></script>
+    <script src="topic.js"></script>
+</body>
+</html>

@@ -1,0 +1,604 @@
+@import url('https://fonts.googleapis.com/css2?family=Underdog&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Underdog', system-ui, sans-serif;
+    color: #faa722;
+    line-height: 1.5;
+}
+
+.page-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+.page-wrapper {
+    background-image: url('fon2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px 0;  /* Было 60px 20px 0, увеличил до 80px */
+}
+/* Дополнительный отступ для контента под плашкой */
+.main-content {
+    margin-top: 40px;
+}
+
+.container {
+    max-width: 1100px;
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.title-block {
+    background-color: #51161a;
+    padding: 15px 30px;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 900;
+    text-align: center;
+    white-space: nowrap;
+}
+/* ===== ТРИ ГЛАВНЫЕ КАРТОЧКИ (ОДИНАКОВОЙ ШИРИНЫ) ===== */
+.cards-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 800px;  /* Добавлено - ограничиваем максимальную ширину */
+    margin: 0 auto;    /* Добавлено - центрируем */
+}
+/* ===== ТРИ ГЛАВНЫЕ КАРТОЧКИ - ИСПРАВЛЕННЫЕ ===== */
+.cards-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Это главное исправление - единый стиль для всех карточек */
+.card {
+    background-color: #2c3b23;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    user-select: none;
+    color: #ecd8b2;
+    /* ВАЖНО: фиксируем одинаковую ширину */
+    width: 230px;  /* Все карточки строго 190px */
+    flex-shrink: 0;  /* Запрещаем сжатие */
+}
+
+.card h2 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+    color: #ecd8b2;
+}
+
+.card p {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    color: #ecd8b2;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    opacity: 0.95;
+}
+/* Секция с историями */
+.stories-section {
+    background-color: #2c3b23;
+    border-radius: 30px;
+    padding: 20px 25px;  /* Уменьшил паддинг */
+    width: 100%;
+    max-width: 800px;
+    margin-top: 15px;  /* Было 30px, стало 15px */
+    margin-bottom: 30px;
+}
+
+.stories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ecd8b2;
+}
+
+.stories-header h2 {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ecd8b2;
+}
+
+.more-link {
+    color: #ecd8b2;
+    text-decoration: none;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.more-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.stories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.story-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(90, 19, 14, 0.2);
+    cursor: pointer;
+    transition: padding 0.2s;
+}
+
+.story-item:hover {
+    padding-left: 10px;
+    background-color: rgba(90, 19, 14, 0.05);
+    border-radius: 10px;
+}
+
+.story-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ecd8b2;
+}
+
+.story-meta {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    color: #ecd8b2;
+}
+
+/* Для мобильных */
+@media (max-width: 600px) {
+    .stories-section {
+        padding: 20px;
+    }
+    
+    .story-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .stories-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+/* --- Новый стиль для поля поиска --- */
+.search-bar {
+    background-color: #2c3b23;
+    padding: 5px 20px;
+    border-radius: 40px;
+    width: 100%;
+    max-width: 400px; /* Сделаем чуть шире */
+    transition: all 0.3s ease;
+    border: 1px solid #ecd8b2;
+}
+
+.search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 10px 0;
+    font-family: 'Underdog', system-ui, sans-serif;
+    font-size: 1rem;
+    color: #ecd8b2;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #ecd8b2;
+    opacity: 0.6;
+    font-family: 'Underdog', system-ui, sans-serif;
+}
+/* --- Свитки мудрости: компактная плашка --- */
+/* --- Свитки мудрости: компактная плашка --- */
+.wisdom-card {
+    background-color: #2c3b23;
+    border-radius: 30px;
+    padding: 20px 25px;
+    width: 100%;
+    max-width: 800px;     /* ← ДОБАВИТЬ ЭТУ СТРОКУ */
+    border: 1px solid #ecd8b2;
+    margin-bottom: 20px;
+    margin-left: auto;    /* ← ДОБАВИТЬ ЭТУ СТРОКУ */
+    margin-right: auto;   /* ← ДОБАВИТЬ ЭТУ СТРОКУ */
+}
+/* Стили для заголовка внутри плашки */
+.wisdom-card .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;  /* Уменьшено, было 20px */
+    padding-bottom: 8px;  /* Уменьшено, было 10px */
+    border-bottom: 2px solid #ecd8b2;
+}
+
+.wisdom-card .section-header h2 {
+    font-size: 1.6rem;  /* Уменьшено, было 1.8rem */
+    font-weight: 600;
+    color: #ecd8b2;
+    margin: 0;
+}
+.wisdom-card .more-link {
+    color: #ecd8b2;
+    text-decoration: none;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.wisdom-card .more-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+.articles-vertical-grid {
+    display: flex;
+    flex-direction: row;  /* ← Горизонтально в ряд */
+    justify-content: space-between;  /* Равномерно распределяем */
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;  /* Чтобы на мобилках переносились */
+}
+.article-vertical {
+    display: flex;
+    flex-direction: column;  /* Вертикальное содержимое внутри карточки */
+    gap: 15px;
+    background-color: #82915c;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1;  /* Равная ширина */
+    min-width: 200px;  /* Минимальная ширина */
+    max-width: 320px;  /* Максимальная ширина */
+}
+
+.article-vertical:hover {
+    transform: translateY(-8px);  /* Поднимается вверх */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.article-vertical-image {
+    width: 100%;
+    height: 140px;
+    background-color: #ecd8b2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #2c3b23;
+}
+
+.article-vertical-content {
+    padding: 0 20px 20px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.article-vertical-content h3 {
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+    color: #2c3b23;
+}
+
+.article-vertical-content p {
+    color: #2c3b23;
+    opacity: 0.85;
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.article-vertical-content .article-meta {
+    color: #2c3b23;
+    opacity: 0.6;
+    margin-top: 5px;
+    font-size: 0.85rem;
+}
+
+/* Добавляем кнопку внизу каждой карточки */
+.read-more-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #2c3b23;
+    color: #ecd8b2;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-align: center;
+    transition: background-color 0.2s;
+    align-self: flex-start;
+}
+
+.read-more-btn:hover {
+    background-color: #1f2c18;
+}
+@media (max-width: 700px) {
+    .article-vertical {
+        flex-direction: column;
+    }
+    .article-vertical-image {
+        width: 100%;
+        height: 100px;
+    }
+    .article-vertical-content {
+        padding: 15px;
+    }
+    .wisdom-card {
+        padding: 20px 15px;
+    }
+}
+/* Объединяющая плашка-фон */
+.navbar-strip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #2c3b23;
+    border-bottom: 2px solid #2c3b23;
+    z-index: 90;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Логотип теперь поверх плашки */
+.logo-flag {
+    position: fixed;  /* Было absolute, стало fixed - будет всегда в одном месте */
+    top: -40px;
+    left: 150px;
+    width: 200px;
+    z-index: 100;
+    transition: transform 0.3s ease;  /* Для анимации */
+}
+
+@media (max-width: 600px) {
+    .logo-flag {
+        width: 80px;  /* Уменьшаем на мобилках */
+        left: 10px;
+        top: -5px;
+    }
+}
+.logo-flag img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}
+.logo-flag:hover {
+    transform: translateY(15px);  /* Опускается на 15px вниз */
+}
+
+/* Если хочешь, чтобы и содержимое выезжало */
+.logo-flag:hover img {
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.2));
+}
+/* Кнопки поверх плашки */
+.top-bar {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 100;
+}
+
+.top-bar-buttons {
+    display: flex;
+    gap: 12px;
+    background-color: #2c3b23;
+    padding: 8px 18px;
+    border-radius: 40px;
+    border: 1px solid #2c3b23;
+}
+
+.top-btn {
+    color: #ecd8b2;
+    text-decoration: none;
+    font-family: 'Underdog', system-ui, sans-serif;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 30px;
+    transition: background-color 0.2s;
+}
+
+.top-btn:hover {
+    background-color: rgba(212, 219, 173, 0.2);
+}
+/* Отступ для контента, чтобы не уходил под плашку */
+.page-wrapper {
+    padding-top: 40px; /* Увеличьте существующий padding-top */
+}
+@media (max-width: 768px) {
+    .articles-vertical-grid {
+        flex-direction: column;  /* На мобилках становятся вертикально */
+        align-items: center;
+    }
+    
+    .article-vertical {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+/* Дополнительные стили для боковых панелей */
+.sidebar-left, .sidebar-right {
+    position: sticky;
+    top: 100px;
+}
+
+/* Убедимся, что основной контент не ломается */
+.main-center {
+    min-width: 0;
+}
+
+.main-center .container {
+    padding: 0 20px;
+}
+
+/* Фикс для страниц без боковых панелей на мобилках */
+@media (max-width: 1000px) {
+    .main-layout {
+        display: block;
+    }
+    .main-center .container {
+        padding: 0;
+    }
+}
+/* 3D Dice Container */
+.dice-container {
+    position: fixed;
+    top: 10px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+    z-index: 200;
+    cursor: pointer;
+}
+
+.dice-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 20px;
+    transition: transform 0.2s;
+}
+
+.dice-container:hover .dice-canvas {
+    transform: scale(1.05);
+}
+
+/* Результат броска */
+.dice-result-toast {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    background: #2c3b23;
+    border: 2px solid #faa722;
+    border-radius: 40px;
+    padding: 8px 18px;
+    color: #faa722;
+    font-family: 'Underdog', system-ui;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 210;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+}
+
+.dice-result-toast.show {
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .dice-container {
+        width: 55px;
+        height: 55px;
+        top: 5px;
+        left: 10px;
+    }
+    .dice-result-toast {
+        top: 70px;
+        left: 10px;
+        font-size: 0.9rem;
+        padding: 5px 12px;
+    }
+}
+/* 3D Dice Container - увеличенный */
+/* Dice container - простой и надёжный */
+.dice-container {
+    position: fixed;
+    top: 15px;
+    left: 20px;
+    width: 100px;
+    height: 100px;
+    z-index: 1000;
+    cursor: pointer;
+    background: rgba(0,0,0,0.1);
+    border-radius: 20px;
+}
+
+.dice-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+}
+
+.dice-result-toast {
+    position: fixed;
+    top: 130px;
+    left: 20px;
+    background: #2c3b23;
+    border: 2px solid #faa722;
+    border-radius: 30px;
+    padding: 8px 20px;
+    color: #faa722;
+    font-family: 'Underdog', system-ui;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+.dice-result-toast.show {
+    opacity: 1;
+}
+@media (max-width: 600px) {
+    .dice-container {
+        width: 80px;
+        height: 80px;
+        top: 8px;
+        left: 10px;
+    }
+    .dice-result-toast {
+        top: 100px;
+        left: 15px;
+        font-size: 1rem;
+        padding: 6px 16px;
+    }
+}

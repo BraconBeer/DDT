@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справочник - DDT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="bestiary.css">
+    <style>
+        /* Дополнительные стили для аккордеона */
+        .cards-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .guide-card {
+            background-color: #2c3b23;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
+            cursor: pointer;
+            width: 230px;
+            flex-shrink: 0;
+            border: 1px solid #ecd8b2;
+        }
+        
+        .guide-card h2 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            color: #ecd8b2;
+        }
+        
+        .guide-card p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            color: #ecd8b2;
+        }
+        
+        .guide-card:hover {
+            transform: scale(1.03);
+            background-color: #3a4d2e;
+        }
+        
+        .dropdown-panel {
+            max-width: 800px;
+            margin: 15px auto 0 auto;
+            background-color: #2c3b23;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #ecd8b2;
+            display: none;
+        }
+        
+        .dropdown-panel.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .panel-header {
+            background-color: #3a4d2e;
+            padding: 12px 20px;
+            border-bottom: 1px solid #ecd8b2;
+        }
+        
+        .panel-header h3 {
+            color: #faa722;
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .articles-list {
+            padding: 12px 0;
+        }
+        
+        .article-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: background 0.2s;
+            border-bottom: 1px solid rgba(236, 216, 178, 0.1);
+        }
+        
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        
+        .article-item:hover {
+            background-color: #3a4d2e;
+            padding-left: 28px;
+        }
+        
+        .article-icon {
+            font-size: 1.5rem;
+        }
+        
+        .article-content {
+            flex: 1;
+        }
+        
+        .article-title {
+            color: #ecd8b2;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .article-desc {
+            color: #82915c;
+            font-size: 0.8rem;
+        }
+        
+        .article-arrow {
+            color: #82915c;
+            font-size: 1.2rem;
+        }
+        
+        .bestiary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+        
+        .bestiary-header .title-block {
+            margin: 0;
+        }
+        
+        .bestiary-header .search-bar {
+            max-width: 280px;
+            margin: 0;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #82915c;
+        }
+        
+        /* Для подсветки поиска */
+        .highlight {
+            background-color: #faa722;
+            color: #2c3b23;
+            border-radius: 4px;
+            padding: 0 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-strip"></div>
+    
+    <div class="page-wrapper">
+        <div class="top-bar"></div>
+        <a href="index.html" class="logo-flag"></a>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="bestiary-header">
+                    <div class="title-block">
+                        <h1>Справочник</h1>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" class="search-input" id="guideSearch" placeholder="🔍 Поиск статей...">
+                    </div>
+                </div>
+
+                <div class="cards-grid" id="guideCards">
+                    <div class="guide-card" data-category="newbie">
+                        <h2> Новичку</h2>
+                        <p>Первые шаги в D&D</p>
+                    </div>
+                    <div class="guide-card" data-category="players">
+                        <h2> Игрокам</h2>
+                        <p>Правила и механики</p>
+                    </div>
+                    <div class="guide-card" data-category="dm">
+                        <h2> Мастерам</h2>
+                        <p>Советы и инструменты</p>
+                    </div>
+                </div>
+
+                <div id="dropdownPanel" class="dropdown-panel">
+                    <div class="panel-header">
+                        <h3 id="panelTitle">📚 Статьи</h3>
+                    </div>
+                    <div class="articles-list" id="articlesList">
+                    </div>
+                </div>
+
+                <section class="articles-section" id="wisdomSection">
+                    <div class="wisdom-card">
+                        <div class="section-header">
+                            <h2>Свитки мудрости</h2>
+                            <a href="#" class="more-link">Все статьи →</a>
+                        </div>
+                        <div class="articles-vertical-grid">
+                            <div class="article-vertical">
+                                <div class="article-vertical-image"></div>
+                                <div class="article-vertical-content">
+                                    <h3>Как создать незабываемого NPC</h3>
+                                    <p>Секреты от опытных мастеров...</p>
+                                    <div class="article-meta">15 мин чтения</div>
+                                </div>
+                            </div>
+                            <div class="article-vertical">
+                                <div class="article-vertical-image"></div>
+                                <div class="article-vertical-content">
+                                    <h3>Баланс боя: как не убить партию</h3>
+                                    <p>Расчет сложности, CR монстров...</p>
+                                    <div class="article-meta">20 мин чтения</div>
+                                </div>
+                            </div>
+                            <div class="article-vertical">
+                                <div class="article-vertical-image"></div>
+                                <div class="article-vertical-content">
+                                    <h3>Лор драконов: от древних до теневых</h3>
+                                    <p>Полное руководство по драконьему пантеону...</p>
+                                    <div class="article-meta">25 мин чтения</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="components.js"></script>
+    <script>
+        // Данные статей
+        const articlesData = {
+            newbie: {
+                title: "🎓 Новичку",
+                articles: [
+                    { title: "Как начать играть в D&D", desc: "Первые шаги, выбор класса и расы", url: "coming-soon.html", icon: "📖" },
+                    { title: "Создание персонажа", desc: "Пошаговое руководство", url: "coming-soon.html", icon: "📝" },
+                    { title: "Основные правила", desc: "Броски кубиков, навыки, бой", url: "coming-soon.html", icon: "⚔️" }
+                ]
+            },
+            players: {
+                title: "🎲 Игрокам",
+                articles: [
+                    { title: "Полное руководство по бою", desc: "Действия, реакции, криты", url: "coming-soon.html", icon: "⚔️" },
+                    { title: "Магия и заклинания", desc: "Ячейки, концентрация", url: "coming-soon.html", icon: "🔮" },
+                    { title: "Снаряжение и доспехи", desc: "Оружие, броня, магические предметы", url: "coming-soon.html", icon: "🛡️" },
+                    { title: "Навыки и способности", desc: "Проверки, спасброски", url: "coming-soon.html", icon: "🎯" }
+                ]
+            },
+            dm: {
+                title: "👑 Мастерам",
+                articles: [
+                    { title: "Как стать Мастером", desc: "Первые шаги, подготовка игры", url: "coming-soon.html", icon: "🎭" },
+                    { title: "Создание мира", desc: "Лор, фракции, боги", url: "coming-soon.html", icon: "🌍" },
+                    { title: "Создание NPC", desc: "Запоминающиеся персонажи", url: "coming-soon.html", icon: "👥" },
+                    { title: "Дизайн встреч", desc: "Баланс боя и ролевых сцен", url: "coming-soon.html", icon: "🐉" }
+                ]
+            }
+        };
+
+        let currentOpen = null;
+        const panel = document.getElementById('dropdownPanel');
+        const panelTitle = document.getElementById('panelTitle');
+        const articlesList = document.getElementById('articlesList');
+
+        function renderArticles(category) {
+            const data = articlesData[category];
+            if (!data) return;
+            
+            panelTitle.textContent = data.title;
+            articlesList.innerHTML = data.articles.map(article => `
+                <a href="${article.url}" class="article-item">
+                    <div class="article-icon">${article.icon}</div>
+                    <div class="article-content">
+                        <div class="article-title">${article.title}</div>
+                        <div class="article-desc">${article.desc}</div>
+                    </div>
+                    <div class="article-arrow">→</div>
+                </a>
+            `).join('');
+        }
+
+        function openPanel(category) {
+            renderArticles(category);
+            panel.classList.add('show');
+            currentOpen = category;
+        }
+
+        function closePanel() {
+            panel.classList.remove('show');
+            currentOpen = null;
+        }
+
+        // Обработчики кликов по плашкам
+        document.querySelectorAll('.guide-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.category;
+                
+                if (currentOpen === category) {
+                    closePanel();
+                } else {
+                    openPanel(category);
+                }
+            });
+        });
+
+        // Закрыть панель при клике вне
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.guide-card') && !e.target.closest('.dropdown-panel')) {
+                closePanel();
+            }
+        });
+
+        // ========== ЛОКАЛЬНЫЙ ПОИСК ПО СТРАНИЦЕ (как в бестиарии) ==========
+        const searchInput = document.getElementById('guideSearch');
+        
+        // Функция для подсветки текста
+        function highlightText(element, query) {
+            if (!query) return element.innerText;
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return element.innerText.replace(regex, '<mark class="highlight">$1</mark>');
+        }
+        
+        function filterArticlesAndWisdom(query) {
+            const lowerQuery = query.toLowerCase().trim();
+            
+            // 1. Фильтруем статьи в открытой панели (если открыта)
+            if (currentOpen) {
+                const items = document.querySelectorAll('.article-item');
+                let hasVisible = false;
+                
+                items.forEach(item => {
+                    const title = item.querySelector('.article-title')?.innerText || '';
+                    const desc = item.querySelector('.article-desc')?.innerText || '';
+                    const matches = !lowerQuery || title.toLowerCase().includes(lowerQuery) || desc.toLowerCase().includes(lowerQuery);
+                    
+                    if (matches) {
+                        item.style.display = '';
+                        hasVisible = true;
+                        // Подсветка
+                        if (lowerQuery) {
+                            const titleEl = item.querySelector('.article-title');
+                            const descEl = item.querySelector('.article-desc');
+                            if (titleEl) {
+                                const originalTitle = titleEl.innerText;
+                                titleEl.innerHTML = highlightText(titleEl, lowerQuery);
+                                titleEl.setAttribute('data-original', originalTitle);
+                            }
+                            if (descEl) {
+                                const originalDesc = descEl.innerText;
+                                descEl.innerHTML = highlightText(descEl, lowerQuery);
+                                descEl.setAttribute('data-original', originalDesc);
+                            }
+                        } else {
+                            // Восстанавливаем оригинальный текст
+                            const titleEl = item.querySelector('.article-title');
+                            const descEl = item.querySelector('.article-desc');
+                            if (titleEl && titleEl.getAttribute('data-original')) {
+                                titleEl.innerText = titleEl.getAttribute('data-original');
+                                titleEl.removeAttribute('data-original');
+                            }
+                            if (descEl && descEl.getAttribute('data-original')) {
+                                descEl.innerText = descEl.getAttribute('data-original');
+                                descEl.removeAttribute('data-original');
+                            }
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Показываем сообщение, если ничего не найдено
+                let noResults = articlesList.querySelector('.no-results-search');
+                if (!hasVisible && lowerQuery) {
+                    if (!noResults) {
+                        noResults = document.createElement('div');
+                        noResults.className = 'no-results-search';
+                        noResults.style.cssText = 'text-align:center; padding:30px; color:#82915c;';
+                        noResults.innerHTML = '🔍 Ничего не найдено';
+                        articlesList.appendChild(noResults);
+                    }
+                } else if (noResults) {
+                    noResults.remove();
+                }
+            }
+            
+            // 2. Фильтруем "Свитки мудрости" (всегда доступны)
+            const wisdomCards = document.querySelectorAll('.article-vertical');
+            const wisdomSection = document.getElementById('wisdomSection');
+            
+            if (wisdomCards.length > 0) {
+                let anyWisdomVisible = false;
+                
+                wisdomCards.forEach(card => {
+                    const title = card.querySelector('h3')?.innerText || '';
+                    const desc = card.querySelector('p')?.innerText || '';
+                    const matches = !lowerQuery || title.toLowerCase().includes(lowerQuery) || desc.toLowerCase().includes(lowerQuery);
+                    
+                    if (matches) {
+                        card.style.display = '';
+                        anyWisdomVisible = true;
+                        // Подсветка
+                        if (lowerQuery) {
+                            const titleEl = card.querySelector('h3');
+                            const descEl = card.querySelector('p');
+                            if (titleEl) {
+                                const original = titleEl.innerText;
+                                titleEl.innerHTML = highlightText(titleEl, lowerQuery);
+                                titleEl.setAttribute('data-original', original);
+                            }
+                            if (descEl) {
+                                const original = descEl.innerText;
+                                descEl.innerHTML = highlightText(descEl, lowerQuery);
+                                descEl.setAttribute('data-original', original);
+                            }
+                        } else {
+                            const titleEl = card.querySelector('h3');
+                            const descEl = card.querySelector('p');
+                            if (titleEl && titleEl.getAttribute('data-original')) {
+                                titleEl.innerText = titleEl.getAttribute('data-original');
+                                titleEl.removeAttribute('data-original');
+                            }
+                            if (descEl && descEl.getAttribute('data-original')) {
+                                descEl.innerText = descEl.getAttribute('data-original');
+                                descEl.removeAttribute('data-original');
+                            }
+                        }
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Показываем/скрываем секцию, если ничего не найдено
+                if (wisdomSection) {
+                    wisdomSection.style.display = (anyWisdomVisible || !lowerQuery) ? '' : 'none';
+                }
+            }
+        }
+        
+        // Обработчик ввода в поиске
+        searchInput.addEventListener('input', (e) => {
+            filterArticlesAndWisdom(e.target.value);
+        });
+        
+        // Открываем первую плашку по умолчанию (опционально)
+        setTimeout(() => {
+            const firstCard = document.querySelector('.guide-card');
+            if (firstCard && !currentOpen) {
+                // не открываем автоматически, просто на всякий случай
+            }
+        }, 100);
+    </script>
+</body>
+</html>

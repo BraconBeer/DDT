@@ -1,0 +1,343 @@
+/* creature-page.css - максимально плотная версия */
+
+.creature-page {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.back-btn {
+    display: inline-block;
+    background-color: #2c3b23;
+    border: 1px solid #ecd8b2;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: #ecd8b2;
+    text-decoration: none;
+    font-family: 'Underdog', system-ui, sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #51161a;
+    transform: translateX(-5px);
+}
+
+/* Герой с фоном */
+.creature-hero {
+    position: relative;
+    background: linear-gradient(135deg, #2c3b23 0%, #2c3b23 100%);
+    border-radius: 30px;
+    padding: 30px;
+    margin-bottom: 8px;
+    border-bottom: 4px solid #faa722;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    min-height: 190px;
+}
+
+/* Картинка на десктопе - справа */
+.hero-background-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 65%;
+    z-index: 0;
+    background-image: url('../RedDragon.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-repeat: no-repeat;
+    mask-image: linear-gradient(to right, transparent 0%, black 40%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%, black 100%);
+}
+
+/* Контент поверх картинки */
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 12px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    width: 45%;
+    min-height: 130px;
+}
+
+.creature-icon {
+    display: none;
+}
+
+.creature-title {
+    text-align: left;
+    width: 100%;
+}
+
+.creature-title h1 {
+    font-size: 2.2rem;
+    margin: 0 0 10px 0;
+    color: #faa722;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.creature-badges {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background-color: #51161a;
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    color: #ecd8b2;
+}
+
+/* Статистика */
+.stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.stat-pill {
+    background-color: #2c3b23;
+    border: 1px solid #ecd8b2;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    color: #ecd8b2;
+}
+
+.stat-pill strong {
+    color: #faa722;
+}
+
+/* Характеристики */
+.attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.attr-card {
+    background-color: #2c3b23;
+    border: 1px solid #ecd8b2;
+    border-radius: 20px;
+    padding: 12px;
+    text-align: center;
+}
+
+.attr-name {
+    display: block;
+    font-size: 0.8rem;
+    color: #82915c;
+    margin-bottom: 5px;
+}
+
+.attr-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #faa722;
+}
+
+/* Навыки */
+.skills-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.skills-block {
+    background-color: #2c3b23;
+    border: 1px solid #ecd8b2;
+    border-radius: 20px;
+    padding: 14px;
+}
+
+.skills-block h3 {
+    font-size: 0.9rem;
+    color: #faa722;
+    margin-bottom: 8px;
+}
+
+.skills-block p {
+    font-size: 0.85rem;
+    color: #ecd8b2;
+}
+
+/* Основные блоки */
+.content-block {
+    background-color: #2c3b23;
+    border-radius: 24px;
+    padding: 18px;
+    margin-bottom: 8px;
+    border: 1px solid #ecd8b2;
+}
+
+.content-block h2 {
+    font-size: 1.4rem;
+    color: #faa722;
+    margin-bottom: 14px;
+    border-left: 4px solid #faa722;
+    padding-left: 12px;
+}
+
+.ability-card {
+    background-color: #3a2a1a;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 10px;
+}
+
+.ability-card:last-child {
+    margin-bottom: 0;
+}
+
+.ability-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #faa722;
+    margin-bottom: 8px;
+}
+
+.ability-card p {
+    font-size: 0.9rem;
+    color: #ecd8b2;
+    line-height: 1.45;
+}
+
+.fire {
+    color: #ff6b35;
+}
+
+.action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(236, 216, 178, 0.15);
+}
+
+.action-item:last-child {
+    border-bottom: none;
+}
+
+.action-name {
+    font-weight: bold;
+    color: #faa722;
+    display: inline-block;
+    min-width: 140px;
+}
+
+.legendary {
+    border-color: #faa722;
+    background: linear-gradient(135deg, #2c3b23 0%, #3a2a1a 100%);
+}
+
+.quote-block {
+    text-align: center;
+    font-style: italic;
+    padding: 16px;
+    margin-top: 6px;
+    color: #82915c;
+    border-top: 1px solid #ecd8b2;
+    font-size: 0.9rem;
+}
+
+/* ============================================ */
+/* МОБИЛЬНАЯ ВЕРСИЯ (до 600px) */
+/* ============================================ */
+@media (max-width: 600px) {
+    .creature-hero {
+        padding: 20px;
+        min-height: 160px;
+    }
+    
+    .hero-content {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .creature-title {
+        text-align: center;
+    }
+    
+    .creature-badges {
+        justify-content: center;
+    }
+    
+    .creature-title h1 {
+        font-size: 1.6rem;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+    }
+    
+    .hero-background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        background-position: center 30%;
+        mask-image: linear-gradient(to right, transparent 0%, black 15%, black 100%);
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 100%);
+    }
+    
+    .action-name {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .stats-row {
+        gap: 6px;
+    }
+    
+    .stat-pill {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+    }
+    
+    .attr-value {
+        font-size: 1.1rem;
+    }
+    
+    .attr-name {
+        font-size: 0.7rem;
+    }
+    
+    .content-block {
+        padding: 14px;
+    }
+    
+    .content-block h2 {
+        font-size: 1.2rem;
+    }
+    
+    .ability-title {
+        font-size: 0.9rem;
+    }
+    
+    .ability-card p {
+        font-size: 0.8rem;
+    }
+}

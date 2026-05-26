@@ -1,0 +1,182 @@
+/* sidebar.css - компактные боковые панели */
+
+/* Новая структура страницы */
+.page-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 60px; /* Уменьшили отступ */
+}
+
+/* Контент по центру + боковые панели */
+.main-layout {
+    display: flex;
+    gap: 20px; /* Уменьшили gap */
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    align-items: flex-start;
+}
+
+/* Левая боковая панель - компактная */
+.sidebar-left {
+    position: sticky;
+    top: 180px;
+    width: 200px; /* Уже, чем было */
+    flex-shrink: 0;
+}
+
+/* Правая боковая панель */
+.sidebar-right {
+    position: sticky;
+    top: 100px;
+    width: 260px;
+    flex-shrink: 0;
+}
+
+/* Основной контент */
+.main-center {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Стили панелей - компактные */
+.sidebar-card {
+    background: #2c3b23;
+    border: 1px solid #ecd8b2;
+    border-radius: 20px;
+    padding: 20px 18px; 
+    margin-bottom: 16px;
+}
+
+.sidebar-card:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-card h3 {
+    color: #faa722;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ecd8b2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.sidebar-menu li {
+    margin-bottom: 6px;
+}
+
+.sidebar-menu a {
+    color: #ecd8b2;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px; 
+    border-radius: 12px;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.sidebar-menu a:hover {
+    background: #51161a;
+    transform: translateX(3px);
+}
+
+.sidebar-menu a.active {
+    background: #faa722;
+    color: #2c3b23;
+}
+
+.divider {
+    height: 1px;
+    background: #ecd8b2;
+    opacity: 0.15;
+    margin: 10px 0;
+}
+
+/* Монстр дня */
+.monster-of-day {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.monster-of-day-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #faa722;
+    margin-bottom: 8px;
+}
+
+.monster-of-day-name {
+    font-weight: bold;
+    color: #faa722;
+    font-size: 1rem;
+}
+
+.monster-of-day-type {
+    font-size: 0.7rem;
+    color: #82915c;
+}
+
+.monster-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #ecd8b2;
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+.monster-link:hover {
+    color: #faa722;
+}
+
+/* Свежие истории */
+.fresh-story-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(236, 216, 178, 0.1);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.fresh-story-item:last-child {
+    border-bottom: none;
+}
+
+.fresh-story-title {
+    color: #ecd8b2;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.fresh-story-meta {
+    font-size: 0.65rem;
+    color: #82915c;
+}
+
+.fresh-story-item:hover .fresh-story-title {
+    color: #faa722;
+}
+
+/* Адаптив */
+@media (max-width: 1000px) {
+    .sidebar-left, .sidebar-right {
+        display: none;
+    }
+    
+    .main-layout {
+        justify-content: center;
+    }
+}
