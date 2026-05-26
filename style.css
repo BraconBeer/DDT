@@ -64,16 +64,6 @@ h1 {
     text-align: center;
     white-space: nowrap;
 }
-/* ===== ТРИ ГЛАВНЫЕ КАРТОЧКИ (ОДИНАКОВОЙ ШИРИНЫ) ===== */
-.cards-grid {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    width: 100%;
-    max-width: 800px;  /* Добавлено - ограничиваем максимальную ширину */
-    margin: 0 auto;    /* Добавлено - центрируем */
-}
 /* ===== ТРИ ГЛАВНЫЕ КАРТОЧКИ - ИСПРАВЛЕННЫЕ ===== */
 .cards-grid {
     display: flex;
