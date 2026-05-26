@@ -54,7 +54,7 @@ function loadComponents() {
     // ========== 3. Логотип ==========
     const logo = document.querySelector('.logo-flag');
     if (logo) {
-        logo.innerHTML = `<img src="Logo.png" alt="DnD Logo">`;
+        logo.innerHTML = `<img src="Logo.PNG" alt="DnD Logo">`;
         logo.href = "index.html";
     }
 
